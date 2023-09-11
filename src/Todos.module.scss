@@ -1,0 +1,62 @@
+@use './styles/index.scss' as *;
+
+.form {
+    padding: 0.5rem 0.25rem;
+    min-height: 3rem;
+    min-width: 25rem;
+    @include flexbox(row, flex-start);
+    input {
+        padding-left: 0.5rem;
+        outline: none;
+        border: none;
+        font-size: 1rem;
+        color: $black;
+    }
+
+    input::placeholder {
+        color: $darkGrey;
+        font-style: italic;
+        font-weight: 100;
+    }
+}
+
+.bottomBar,
+.displayButtons {
+    @include flexbox(row, space-between);
+}
+
+.bottomBar {
+    padding: 0.25rem 0.75rem;
+
+    button {
+        padding: 0.2rem;
+        border: none;
+        background-color: inherit;
+        cursor: pointer;
+    }
+    .active {
+        border: solid 1px $grey;
+        border-radius: 0.2rem;
+    }
+    button,
+    .button {
+        font-size: 0.75rem;
+        color: $black;
+    }
+
+    .displayButtons {
+        gap: 1rem;
+    }
+}
+
+@media (max-width: $breakpoint-mobile) {
+    .form {
+        min-width: unset;
+    }
+
+    .bottomBar {
+        gap: 0.3rem;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

@@ -1,0 +1,33 @@
+@use '../../styles/index.scss' as *;
+
+.wrapper {
+    min-height: 3rem;
+    background-color: $white;
+    border-bottom: solid 2px $grey;
+
+    input {
+        position: absolute;
+        opacity: 0;
+        height: 0;
+        width: 0;
+    }
+}
+
+.label {
+    @include flexbox(row, flex-start);
+    gap: 0.5rem;
+    padding: 0.5rem 0.5rem;
+    cursor: pointer;
+}
+
+.checkMark {
+    @include flexbox;
+    height: 30px;
+    width: 30px;
+    border: solid 1px $darkGrey;
+    border-radius: 50%;
+}
+.checked {
+    color: $darkGrey;
+    text-decoration: line-through;
+}

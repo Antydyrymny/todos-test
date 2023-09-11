@@ -1,0 +1,42 @@
+@use '../../styles/index.scss' as *;
+
+.bottomBar,
+.displayButtons {
+    @include flexbox(row, space-between);
+}
+
+.bottomBar {
+    padding: 0.25rem 0.75rem;
+
+    button {
+        padding: 0.2rem;
+        border: none;
+        background-color: inherit;
+        cursor: pointer;
+    }
+    .active {
+        border: solid 1px $darkGrey;
+        border-radius: 0.2rem;
+    }
+    button,
+    .button {
+        font-size: 0.75rem;
+        color: $black;
+    }
+
+    .displayButtons {
+        gap: 1rem;
+    }
+}
+.clearCompleted:active {
+    background-color: $grey;
+    border-radius: 0.2rem;
+}
+
+@media (max-width: $breakpoint-mobile) {
+    .bottomBar {
+        gap: 0.3rem;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

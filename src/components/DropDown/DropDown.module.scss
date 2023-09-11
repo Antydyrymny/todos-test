@@ -1,0 +1,16 @@
+@use '../../styles/index.scss' as *;
+
+.mainBar {
+    @include flexbox(row, flex-start);
+    border-bottom: solid 2px $darkGrey;
+    padding-left: 0.75rem;
+}
+
+.dropwDownArrow {
+    @include transition(0.15s, transform);
+    cursor: pointer;
+}
+
+.closed {
+    transform: rotate(180deg);
+}

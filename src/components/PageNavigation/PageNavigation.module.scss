@@ -1,0 +1,35 @@
+@use '../../styles/index.scss' as *;
+
+.prevPage,
+.nextPage {
+    position: absolute;
+    cursor: pointer;
+    top: 7.5rem;
+    transform: translate(0, -50%);
+}
+
+.prevPage {
+    left: -3rem;
+}
+
+.nextPage {
+    right: -3rem;
+}
+
+.pageDisabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+@media (max-width: $breakpoint-mobile) {
+    .pageNavigation {
+        margin-block: 0.5rem;
+        padding-inline: 0.5rem;
+        @include flexbox(row, space-between);
+        .prevPage,
+        .nextPage {
+            position: static;
+            transform: none;
+        }
+    }
+}

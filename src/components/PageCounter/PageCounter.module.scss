@@ -1,0 +1,8 @@
+@use '../../styles/index.scss' as *;
+
+.pageCounter {
+    position: absolute;
+    right: 1rem;
+    font-size: 0.75rem;
+    color: $black;
+}

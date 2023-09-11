@@ -1,0 +1,22 @@
+@use '../../styles/index.scss' as *;
+
+.decoration1,
+.decoration2 {
+    position: absolute;
+    height: 0.3rem;
+    background-color: $white;
+    left: 50%;
+    box-shadow: 5px 0 10px -2px $black, -5px -0 10px -2px $black;
+}
+
+.decoration1 {
+    bottom: -0.3rem;
+    width: 98%;
+    transform: translate3d(-50%, 0, -10px);
+}
+
+.decoration2 {
+    bottom: -0.6rem;
+    width: 96%;
+    transform: translate3d(-50%, 0, -20px);
+}

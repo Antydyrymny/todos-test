@@ -1,0 +1,21 @@
+@use './styles/index.scss' as *;
+
+.wrapper {
+    @include flexbox(column, flex-start);
+    min-height: 100vh;
+    .title {
+        margin-top: 4rem;
+        padding-bottom: 1rem;
+        text-align: center;
+        font-family: 'Roboto';
+        font-size: 4rem;
+        font-weight: 100;
+    }
+    .container {
+        margin-bottom: 1rem;
+        position: relative;
+        transform-style: preserve-3d;
+        background-color: $white;
+        box-shadow: 5px 0 10px -5px $black, -5px 0 10px -5px $black;
+    }
+}
