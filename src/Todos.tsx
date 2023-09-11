@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useLocalStorageState, usePagination } from './hooks';
 import { v4 as uuidv4 } from 'uuid';
 import { Todo, TodoDisplayType } from './TodoTypes';
@@ -14,6 +14,15 @@ const todosPerPage = 3;
 function Todos() {
     const [todos, setTodos] = useLocalStorageState<Todo[]>([], localStorageKey);
     const [displayType, setDisplayType] = useState<TodoDisplayType>(TodoDisplayType.all);
+
+    // Helper functions
+    const getActiveTodos = useCallback(() => {
+        return todos.filter((todo: Todo): boolean => !todo.completed);
+    }, [todos]);
+    const getCompletedTodos = useCallback(() => {
+        return todos.filter((todo: Todo): boolean => todo.completed);
+    }, [todos]);
+
     const filteredTodos: Todo[] =
         displayType === TodoDisplayType.all
             ? todos
@@ -35,14 +44,21 @@ function Todos() {
     const todosOnCurPage: Todo[] = getEntriesForCurPage(filteredTodos);
 
     // Event handlers
-    const addTodo = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        if (newTodoTitle.trim() !== '') {
-            setTodos([...todos, { id: uuidv4(), title: newTodoTitle, completed: false }]);
-            setNewTodoTitle('');
-        }
-    };
-    const getToggleTodo =
+    const addTodo = useCallback(
+        (e: React.FormEvent<HTMLFormElement>) => {
+            e.preventDefault();
+            if (newTodoTitle.trim() !== '') {
+                setTodos([
+                    ...todos,
+                    { id: uuidv4(), title: newTodoTitle, completed: false },
+                ]);
+                setNewTodoTitle('');
+            }
+        },
+        [newTodoTitle, setTodos, todos]
+    );
+
+    const getToggleTodo = useCallback(
         (targetId: string) => (e: React.ChangeEvent<HTMLInputElement>) =>
             setTodos(
                 todos.map(
@@ -51,8 +67,14 @@ function Todos() {
                             ? { ...todo, completed: e.target.checked }
                             : todo
                 )
-            );
-    const clearCompletedTodos = () => setTodos(getActiveTodos());
+            ),
+        [setTodos, todos]
+    );
+
+    const clearCompletedTodos = useCallback(
+        () => setTodos(getActiveTodos()),
+        [getActiveTodos, setTodos]
+    );
 
     return (
         <DropDown
@@ -85,14 +107,6 @@ function Todos() {
             />
         </DropDown>
     );
-
-    // Helper functions
-    function getActiveTodos() {
-        return todos.filter((todo: Todo): boolean => !todo.completed);
-    }
-    function getCompletedTodos() {
-        return todos.filter((todo: Todo): boolean => todo.completed);
-    }
 }
 
 export default Todos;
